@@ -22,7 +22,7 @@ const formSchema = z.object({
   url: z
     .string()
     .url("Link harus berupa URL yang valid")
-    .refine((val) => val.startsWith("https://"), {
+    .refine((val) => val.includes("https://"), {
       message: "Link harus diawali dengan https://",
     }),
 });
@@ -113,29 +113,29 @@ export default function HomePage() {
           </Button>
         </form>
       </Form>
-      <div className="gap-16 grid grid-cols-1 md:grid-cols-5">
+      <div className="flex gap-16 w-full">
         {loading ? (
-          <>
+          <div className="flex justify-center items-center mt-16 w-full text-center">
             <HashLoader
               color={"#22c55e"}
-              loading={loading}
+              loading={true}
               cssOverride={override}
-              size={150}
+              size={50}
               aria-label="Loading Spinner"
               data-testid="loader"
             />
-          </>
+          </div>
         ) : (
           <>
             {data ? (
               <>
-                <div className="col-span-1 md:col-span-3">
+                <div className="w-full md:w-3/5">
                   <h2 className="mb-4 pb-2 border-[#22c55e] border-b-2 font-semibold text-xl">
                     Content
                   </h2>
                   <p className="text-justify">{data.content}</p>
                 </div>
-                <div className="col-span-1 md:col-span-2">
+                <div className="w-full md:w-2/5">
                   <h2 className="mb-4 pb-2 border-[#22c55e] border-b-2 font-semibold text-xl">
                     Summary
                   </h2>
